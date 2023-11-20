@@ -1,14 +1,15 @@
 GCC = gcc
-CFLAGS = -o3
+CFLAGS = -o
+CLIBS = -lcunit
 
 SOURCE = source
 BUILD = build
 
-main: build
-	$(GCC) main.c $(CFLAGS) main
+main:
+	$(GCC) main.c $(CFLAGS) main $(CLIBS)
 
-build:
-	mkdir -p $(BUILD)/
+rerun: clean main
+	./main
 
 clean:
 	rm -f main
