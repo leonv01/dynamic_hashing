@@ -5,3 +5,4 @@ This repository contains several data structures for dynamic hashing for my scie
 ## Types of dynamic hashing data structures:
 - Linear Hashing
 - Spiral Hashing
+- Extendible Hashing 
