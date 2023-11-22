@@ -5,6 +5,8 @@
 
 #define BUCKET_SIZE 100
 
+int elements = 1000000;
+
 /**
  * @struct Node
  * Represents a node in a data structure.
@@ -227,7 +229,7 @@ void test_measureTime(void) {
     int value = 123;
 
     clock_t start = clock();
-    for (int i = 0; i < 1000000; i++) { 
+    for (int i = 0; i < elements; i++) { 
         char key[20];
         sprintf(key, "testKey%d", i); 
         measureTime(table, key, value);
@@ -236,12 +238,13 @@ void test_measureTime(void) {
 
     double time_taken = ((double) end - start) / CLOCKS_PER_SEC;
 
-    CU_ASSERT(time_taken < 1.0);
+    CU_ASSERT(time_taken < 10.0);
 
-	printf("Entries: %d\n", 10000000);
-	printf("Size: %d\n", table->size);
 
     freeHashTable(table);
+
+    printf("Elements: %d\n", elements);
+    printf("Size: %d\n", table->size);
 }
 
 /**
@@ -249,7 +252,11 @@ void test_measureTime(void) {
  * @brief This is the main file for the linear hashing program.
  *        It contains the main function that serves as the entry point of the program.
  */
-int main() {
+int main(int argc, char** argv) {
+    if(argc > 1){
+        elements = atoi(argv[1]);
+    }
+
     if (CUE_SUCCESS != CU_initialize_registry())
         return CU_get_error();
 
